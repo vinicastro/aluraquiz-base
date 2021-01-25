@@ -25,25 +25,30 @@ export const QuizContainer = styled.div `
 
 export default function Home() {
   return(
-  <QuizBackground backgroundImage={db.bg}>
-    <QuizContainer>
-      <Widget>
-        <Widget.Header>
-          <h1>Aleatoriedades Biológicas</h1>
-        </Widget.Header>
+  <>
+  <head>
+    <meta property="og:image" content={db.bg} />
+  </head>
+    <QuizBackground backgroundImage={db.bg}>
+      <QuizContainer>
+        <Widget>
+          <Widget.Header>
+            <h1>Aleatoriedades Biológicas</h1>
+          </Widget.Header>
+          <Widget.Content>
+            <p>lorem ipsulum...</p>
+          </Widget.Content>
+        </Widget>
+        <Widget>
         <Widget.Content>
-          <p>lorem ipsulum...</p>
-        </Widget.Content>
-      </Widget>
-      <Widget>
-      <Widget.Content>
-          <h1>Quizes da Galera</h1>
-          <p>lorem ipsulum...</p>
-        </Widget.Content>
-      </Widget>
-      <Footer />
-    </QuizContainer>
-    <GitHubCorner projectUrl="https://github.com/vinicastro" />
-  </QuizBackground>
+            <h1>Quizes da Galera</h1>
+            <p>lorem ipsulum...</p>
+          </Widget.Content>
+        </Widget>
+        <Footer />
+      </QuizContainer>
+      <GitHubCorner projectUrl="https://github.com/vinicastro" />
+    </QuizBackground>
+  </>
   )
 }
