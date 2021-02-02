@@ -33,7 +33,6 @@ export default function Home() {
               event.preventDefault();
 
               router.push(`/quiz?name=${name}`);
-              console.log('Submiting form using React');
             }}
             >
               <Input
