@@ -4,25 +4,27 @@
     "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
     "questions": [
       {
-        "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-        "title": "Como fazer um seletor por id via CSS?",
+        "image": "https://media.tenor.com/images/00ca7af8216458e808a956b25cd20a0d/tenor.gif",
+        "title": "Uma sequência de bases nitrogenadas que podem ser traduzidas em proteina é a definição de:",
         "description": "Essa é pra aquecer",
-        "answer": 2,
+        "answer": 0,
         "alternatives": [
-          ".elemento",
-          "*elemento",
-          "#elemento",
-          "%elemento"
+          "gene",
+          "cromossomo",
+          "histona",
+          "aminoácido"
         ]
       },
       {
-        "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-        "title": "Como fazer um background gradiente com css?",
-        "description": "Faz tempo em haha",
-        "answer": 0,
+        "image": "https://media1.giphy.com/media/9N2UvCx7wXLnG/giphy.gif",
+        "title": "A região do neurônio responsavél pela transmissão de impulso elétrico é:",
+        "description": "Pensa que lembra!",
+        "answer": 2,
         "alternatives": [
-           "background: linear-gradient(#e66465, #9198e5);",
-           "background: gradient(#e66465, #9198e5);"
+           "Dendrito",
+           "Bainha de Mielina",
+           "Axônio",
+           "Corpo celular"
         ]
       }
     ],
