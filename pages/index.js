@@ -20,7 +20,6 @@ export default function Home() {
   return (
     <QuizBackground backgroundImage={db.bg}>
       <Head>
-        <meta property="og:image" content={db.bg} />
         <title>AluraQuiz - Modelo Base</title>
       </Head>
       <QuizContainer>
