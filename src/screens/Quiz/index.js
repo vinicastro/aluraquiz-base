@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import db from '../db.json';
-import Widget from '../src/components/Widget';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizLogo from '../src/components/QuizLogo';
-import Button from '../src/components/Button';
-import QuizContainer from '../src/components/QuizContainer';
+import Widget from '../../components/Widget';
+import QuizBackground from '../../components/QuizBackground';
+import QuizLogo from '../../components/QuizLogo';
+import Button from '../../components/Button';
+import QuizContainer from '../../components/QuizContainer';
+import AlternativesForm from '../../components/AlternativesForm';
+import BackLinkArrow from '../../components/BackLinkArrow';
 
 function ResultWidget({ results }) {
   const correctAnswers = results.reduce((sumCorrectAnswers, result) => {
@@ -18,7 +19,7 @@ function ResultWidget({ results }) {
   return (
     <Widget>
       <Widget.Header>
-        Resultado:
+        Resultado
       </Widget.Header>
       <Widget.Content>
         <p>{`Você acertou ${correctAnswers} questões. É o bichão memo hein!?`}</p>
@@ -62,7 +63,7 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
-        { /* <BackLinkArrow href="/" /> */}
+        <BackLinkArrow href="/" />
         <h3>
           {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
         </h3>
@@ -84,7 +85,7 @@ function QuestionWidget({
         <p>
           {question.description}
         </p>
-        <form
+        <AlternativesForm
           onSubmit={(event) => {
             event.preventDefault();
             setIsQuestionSubmitedState(true);
@@ -98,13 +99,18 @@ function QuestionWidget({
         >
           {question.alternatives.map((alternative, alternativeIndex) => {
             const alternativeId = `alternative__${alternativeIndex}`;
+            const alternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
+            const isSelected = selectedAlternative === alternativeIndex;
             return (
               <Widget.Topic
                 as="label"
                 htmlFor={alternativeId}
                 key={alternativeId}
+                data-selected={isSelected}
+                data-status={isQuestionSubmited && alternativeStatus}
               >
                 <input
+                  style={{ display: 'none' }}
                   id={alternativeId}
                   type="radio"
                   name={questionId}
@@ -125,7 +131,7 @@ function QuestionWidget({
 
           {isQuestionSubmited && isCorrect && <p>Você Acertou!</p>}
           {isQuestionSubmited && !isCorrect && <p>Você Errou!</p>}
-        </form>
+        </AlternativesForm>
       </Widget.Content>
     </Widget>
   );
@@ -136,14 +142,14 @@ const screenStates = {
   LOADING: 'LOADING',
   RESULT: 'RESULT',
 };
-export default function QuizPage() {
+export default function QuizPage({ externalQuestions, externalBg }) {
   const [results, setResultsState] = React.useState([]);
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [currentQuestion, setCurrentQuestionIndexState] = React.useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
-  const totalQuestions = db.questions.length;
-
+  const question = externalQuestions[questionIndex];
+  const totalQuestions = externalQuestions.length;
+  const bg = externalBg;
   function addResult(result) {
     setResultsState([
       ...results,
@@ -163,7 +169,7 @@ export default function QuizPage() {
     }
   }
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={bg}>
       <QuizContainer>
         <QuizLogo />
         { screenState === screenStates.QUIZ && (
