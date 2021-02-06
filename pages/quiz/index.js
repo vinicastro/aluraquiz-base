@@ -8,6 +8,7 @@ import QuizLogo from '../../src/components/QuizLogo';
 import Button from '../../src/components/Button';
 import QuizContainer from '../../src/components/QuizContainer';
 import AlternativesForm from '../../src/components/AlternativesForm';
+import BackLinkArrow from '../../src/components/BackLinkArrow';
 
 function ResultWidget({ results }) {
   const correctAnswers = results.reduce((sumCorrectAnswers, result) => {
@@ -63,7 +64,7 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
-        { /* <BackLinkArrow href="/" /> */}
+        <BackLinkArrow href="/" />
         <h3>
           {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
         </h3>
@@ -111,6 +112,7 @@ function QuestionWidget({
               >
                 <input
                   style={{ display: 'none' }}
+                  checked={isSelected}
                   id={alternativeId}
                   type="radio"
                   name={questionId}

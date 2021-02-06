@@ -111,6 +111,7 @@ function QuestionWidget({
               >
                 <input
                   style={{ display: 'none' }}
+                  checked={isSelected}
                   id={alternativeId}
                   type="radio"
                   name={questionId}
