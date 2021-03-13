@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import Lottie from 'react-lottie';
 
 import Widget from '../../components/Widget';
 import QuizBackground from '../../components/QuizBackground';
@@ -8,6 +9,7 @@ import Button from '../../components/Button';
 import QuizContainer from '../../components/QuizContainer';
 import AlternativesForm from '../../components/AlternativesForm';
 import BackLinkArrow from '../../components/BackLinkArrow';
+import animationData from '../../animation.json';
 
 function ResultWidget({ results }) {
   const correctAnswers = results.reduce((sumCorrectAnswers, result) => {
@@ -16,13 +18,14 @@ function ResultWidget({ results }) {
     }
     return sumCorrectAnswers;
   }, 0);
+  const customMessage = results.length === correctAnswers ? ' É o bichão memo hein!?' : ' BOOOOOA!';
   return (
     <Widget>
       <Widget.Header>
         Resultado
       </Widget.Header>
       <Widget.Content>
-        <p>{`Você acertou ${correctAnswers} questões. É o bichão memo hein!?`}</p>
+        <p>{`Você acertou ${correctAnswers} questões.${customMessage}`}</p>
         <ul>
           {results.map((result, resultIndex) => (
             <li key={`result__${result}`}>
@@ -36,13 +39,25 @@ function ResultWidget({ results }) {
 }
 
 function LoadingWidget() {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
   return (
     <Widget>
       <Widget.Header>
         Carregando...
       </Widget.Header>
       <Widget.Content>
-        [Desafio do Loading]
+        <Lottie
+          options={defaultOptions}
+          isStopped={false}
+          isPaused={false}
+        />
       </Widget.Content>
     </Widget>
   );
@@ -147,10 +162,12 @@ export default function QuizPage({ externalQuestions, externalBg }) {
   const [results, setResultsState] = React.useState([]);
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [currentQuestion, setCurrentQuestionIndexState] = React.useState(0);
+
   const questionIndex = currentQuestion;
   const question = externalQuestions[questionIndex];
   const totalQuestions = externalQuestions.length;
   const bg = externalBg;
+
   function addResult(result) {
     setResultsState([
       ...results,
@@ -160,7 +177,7 @@ export default function QuizPage({ externalQuestions, externalBg }) {
   React.useEffect(() => {
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
-    }, 1 * 1000);
+    }, 5 * 1000);
   }, []);
   function handleSubmitQuiz() {
     if (currentQuestion + 1 < totalQuestions) {
